@@ -18,7 +18,7 @@ function App() {
   return (
     <>
        <div>
-           {content}
+          From the API : {content}
        </div>
     </>
   )
