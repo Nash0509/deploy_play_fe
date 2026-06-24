@@ -37,13 +37,16 @@ jobs:
           target: "/home/ec2-user/deploy_play_fe/"
           strip_components: 0
 
-      - name: Reload Nginx
+      - name: Move build to Nginx folder and Reload
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            echo "--- Copying new build to Nginx folder ---"
+            sudo rm -rf /usr/share/nginx/html/*
+            sudo cp -r /home/ec2-user/deploy_play_fe/dist/* /usr/share/nginx/html/
             echo "--- Reloading Nginx ---"
             sudo systemctl reload nginx
-            echo "--- FE Deployment Done ✅ ---"
+            echo "--- FE Deployed ✅ ---"
