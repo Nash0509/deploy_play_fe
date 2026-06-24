@@ -9,7 +9,7 @@ function App() {
   }, [])
 
     function getDashboardData() { 
-      fetch('http://localhost:2000/')
+      fetch('/api/')
      .then(res => res.json())
      .then((res) => setContent(res.dashboardContent))
      .catch((err) => console.error(err));
